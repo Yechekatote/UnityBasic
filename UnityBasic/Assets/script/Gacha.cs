@@ -5,6 +5,7 @@ using UnityEngine;
 public class Gacha : MonoBehaviour
 {
     // Start is called before the first frame update
+    int gachacount;
     void Start()
     {
         string[] array = new string[5]; // 총 5개를 배열 하겠다
@@ -103,8 +104,6 @@ public class Gacha : MonoBehaviour
     public void Gachasystem()
     {
 
-
-
         List<string> swordskill = new List<string>();
     // 🟩 Normal
         swordskill.Add("바람베기 - 바람처럼 빠르게 휘두르는 베기");
@@ -160,29 +159,34 @@ public class Gacha : MonoBehaviour
         int RG = Random.Range(10, 20);
         int NG = Random.Range(0, 10);
 
-        if (RandomGacha <= 3)
+        if (RandomGacha <= 3 || gachacount == 79)
         {
             Debug.Log($"픽업 {swordskill[39]} , 발동! ");
+            gachacount = 0;
         }
 
         else if (RandomGacha <= 6)
         {
             Debug.Log($"전설 {swordskill[LG]} , 발동!");
+            gachacount = 0;
         }
 
         else if (RandomGacha <= 16)
         {
             Debug.Log($"유니크 {swordskill[UG]} , 발동!");
+            gachacount++;
         }
 
         else if (RandomGacha <= 46)
         {
             Debug.Log($"레어 {swordskill[RG]} , 발동!");
+            gachacount++;
         }
 
         else
         {
             Debug.Log($"노말 {swordskill[NG]} , 발동!");
+            gachacount++;
         }
 
 
@@ -190,10 +194,11 @@ public class Gacha : MonoBehaviour
 
     public void tengacha()
     {
-        for (int i = 1; i < 10; i++)
+        for (int i = 0; i < 10; i++)
         {
             Gachasystem();
         }
+        Debug.Log(gachacount);
     }
 
     // Update is called once per frame
